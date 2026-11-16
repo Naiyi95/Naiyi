@@ -42,27 +42,25 @@
         html[data-theme="pink"] .portal-btn { background: linear-gradient(135deg, #ffffff 0%, #fdf2f8 100%); border-color: #fbcfe8; }
         html[data-theme="pink"] .portal-btn .portal-btn-title { color: #be185d; }
         html[data-theme="pink"] .portal-btn .portal-btn-sub { color: #db2777; }
-        html[data-theme="pink"] .portal-btn.primary { background: linear-gradient(135deg, #f9a8d4 0%, #ec4899 100%); border-color: transparent; }
-        html[data-theme="pink"] .portal-btn.primary .portal-btn-title { color: #ffffff; }
-        html[data-theme="pink"] .portal-btn.primary .portal-btn-sub { color: #fce7f3; }
         html[data-theme="pink"] .bg-blue-500, html[data-theme="pink"] .bg-yellow-500, html[data-theme="pink"] .bg-green-500, html[data-theme="pink"] .bg-indigo-500 { background: linear-gradient(135deg, #f472b6 0%, #db2777 100%) !important; }
         html[data-theme="pink"] .bg-blue-50, html[data-theme="pink"] .bg-yellow-50, html[data-theme="pink"] .bg-green-50 { background-color: #fdf2f8 !important; }
         html[data-theme="pink"] .text-blue-500, html[data-theme="pink"] .text-blue-600, html[data-theme="pink"] .text-yellow-700, html[data-theme="pink"] .text-green-700 { color: #be185d !important; }
         html[data-theme="pink"] .border-blue-200, html[data-theme="pink"] .border-yellow-200, html[data-theme="pink"] .border-green-200 { border-color: #fbcfe8 !important; }
         html[data-theme="pink"] .tab-active { border-bottom: 2px solid #ec4899 !important; color: #db2777 !important; }
+        /* 粉色主题下的右上角按钮 */
+        html[data-theme="pink"] #top-login-btn { color: #db2777 !important; border-color: #fbcfe8 !important; background-color: #ffffff !important; }
 
         html[data-theme="arisa"] body { background-color: #faf5ff !important; color: #4c1d95; background-image: radial-gradient(#c4b5fd 1.5px, transparent 1.5px), radial-gradient(#c4b5fd 1.5px, transparent 1.5px); background-size: 40px 40px; background-position: 0 0, 20px 20px; }
         html[data-theme="arisa"] .portal-btn { background: linear-gradient(135deg, #ffffff 0%, #f3e8ff 100%); border-color: #ddd6fe; }
         html[data-theme="arisa"] .portal-btn .portal-btn-title { color: #6b21a8; }
         html[data-theme="arisa"] .portal-btn .portal-btn-sub { color: #9333ea; }
-        html[data-theme="arisa"] .portal-btn.primary { background: linear-gradient(135deg, #a855f7 0%, #7e22ce 100%); border-color: transparent; }
-        html[data-theme="arisa"] .portal-btn.primary .portal-btn-title { color: #ffffff; }
-        html[data-theme="arisa"] .portal-btn.primary .portal-btn-sub { color: #e9d5ff; }
         html[data-theme="arisa"] .bg-blue-500, html[data-theme="arisa"] .bg-yellow-500, html[data-theme="arisa"] .bg-green-500, html[data-theme="arisa"] .bg-indigo-500 { background: linear-gradient(135deg, #a855f7 0%, #7e22ce 100%) !important; }
         html[data-theme="arisa"] .bg-blue-50, html[data-theme="arisa"] .bg-yellow-50, html[data-theme="arisa"] .bg-green-50 { background-color: #ede9fe !important; }
         html[data-theme="arisa"] .text-blue-500, html[data-theme="arisa"] .text-blue-600, html[data-theme="arisa"] .text-yellow-700, html[data-theme="arisa"] .text-green-700 { color: #6b21a8 !important; }
         html[data-theme="arisa"] .border-blue-200, html[data-theme="arisa"] .border-yellow-200, html[data-theme="arisa"] .border-green-200 { border-color: #ddd6fe !important; }
         html[data-theme="arisa"] .tab-active { border-bottom: 2px solid #8b5cf6 !important; color: #7e22ce !important; }
+        /* 紫色主题下的右上角按钮 */
+        html[data-theme="arisa"] #top-login-btn { color: #7e22ce !important; border-color: #ddd6fe !important; background-color: #ffffff !important; }
 
         .bg-white { background-color: #ffffff !important; }
         @media screen and (max-width: 768px) { body { font-size: 14px; } h1.text-2xl { font-size: 1.25rem; margin-bottom: 1rem; } .p-6 { padding: 1rem; } .mb-6 { margin-bottom: 1rem; } .gap-4 { gap: 0.5rem; } }
@@ -76,23 +74,30 @@
     </style>
 </head>
 <body class="bg-gray-100 min-h-screen font-sans text-gray-700 transition-colors duration-300">
-    <div class="fixed top-4 right-4 z-[999] font-sans">
-    <!-- 触发按钮补全 -->
-    <button onclick="document.getElementById('themePanel').classList.toggle('hidden')" class="bg-white border border-gray-200 shadow-sm text-gray-600 px-3 py-2 rounded-full hover:bg-gray-50 transition flex items-center gap-2 text-sm font-bold">
-        <svg class="w-4 h-4 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
-        <span class="hidden sm:inline">Theme / 主题</span>
-    </button>
     
-    <!-- 下拉面板 -->
-    <div id="themePanel" class="hidden absolute right-0 mt-2 w-44 bg-white rounded-lg shadow-lg border border-gray-100 overflow-hidden">
-        <div class="px-3 py-2 bg-gray-50 border-b border-gray-100 text-xs font-bold text-gray-400">选择界面风格</div>
-        <div class="flex flex-col">
-            <button onclick="changeTheme('classic')" class="px-4 py-3 text-sm text-left font-bold text-gray-700 hover:bg-blue-50 hover:text-blue-600 border-b border-gray-50 flex items-center justify-between group transition-colors">经典蓝白 <svg class="w-4 h-4 text-blue-500 opacity-0 group-hover:opacity-100 transition-opacity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></button>
-            <button onclick="changeTheme('pink')" class="px-4 py-3 text-sm text-left font-bold text-gray-700 hover:bg-pink-50 hover:text-pink-600 border-b border-gray-50 flex items-center justify-between group transition-colors">浅粉 🌸 <svg class="w-4 h-4 text-pink-500 opacity-0 group-hover:opacity-100 transition-opacity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></button>
-            <button onclick="changeTheme('arisa')" class="px-4 py-3 text-sm text-left font-bold text-gray-700 hover:bg-purple-50 hover:text-purple-600 flex items-center justify-between group transition-colors">紫色 💜 <svg class="w-4 h-4 text-purple-500 opacity-0 group-hover:opacity-100 transition-opacity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></button>
+    <!-- 🌟 全局控制中心 (右上角) -->
+    <div class="fixed top-4 right-4 z-[999] font-sans flex items-center gap-2">
+        <!-- 团长登录按钮 (移到这里) -->
+        <button onclick="showScreen('login-screen')" id="top-login-btn" class="bg-white border border-gray-200 shadow-sm text-gray-600 px-4 py-2 rounded-full hover:bg-gray-50 transition text-sm font-bold flex items-center gap-1">
+            <span>👑</span> <span class="hidden sm:inline">团长登录</span>
+        </button>
+
+        <!-- 主题切换按钮 -->
+        <button onclick="document.getElementById('themePanel').classList.toggle('hidden')" class="bg-white border border-gray-200 shadow-sm text-gray-600 px-4 py-2 rounded-full hover:bg-gray-50 transition flex items-center gap-2 text-sm font-bold">
+            <svg class="w-4 h-4 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+            <span class="hidden sm:inline">主题</span>
+        </button>
+        
+        <!-- 主题下拉面板 -->
+        <div id="themePanel" class="hidden absolute right-0 top-full mt-2 w-44 bg-white rounded-lg shadow-lg border border-gray-100 overflow-hidden">
+            <div class="px-3 py-2 bg-gray-50 border-b border-gray-100 text-xs font-bold text-gray-400">选择界面风格</div>
+            <div class="flex flex-col">
+                <button onclick="changeTheme('classic')" class="px-4 py-3 text-sm text-left font-bold text-gray-700 hover:bg-blue-50 hover:text-blue-600 border-b border-gray-50 flex items-center justify-between group transition-colors">经典蓝白 <svg class="w-4 h-4 text-blue-500 opacity-0 group-hover:opacity-100 transition-opacity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></button>
+                <button onclick="changeTheme('pink')" class="px-4 py-3 text-sm text-left font-bold text-gray-700 hover:bg-pink-50 hover:text-pink-600 border-b border-gray-50 flex items-center justify-between group transition-colors">樱花浅粉 🌸 <svg class="w-4 h-4 text-pink-500 opacity-0 group-hover:opacity-100 transition-opacity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></button>
+                <button onclick="changeTheme('arisa')" class="px-4 py-3 text-sm text-left font-bold text-gray-700 hover:bg-purple-50 hover:text-purple-600 flex items-center justify-between group transition-colors">市谷有咲 🌟 <svg class="w-4 h-4 text-purple-500 opacity-0 group-hover:opacity-100 transition-opacity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></button>
+            </div>
         </div>
     </div>
-</div>
 
     <script>
         function changeTheme(themeKey) {
@@ -121,34 +126,16 @@
         <div id="loadingText" class="text-blue-600 font-bold">处理中...</div>
     </div>
 
-    <div id="portal-screen" class="max-w-md mx-auto pt-16 px-4 fade-in">
+    <!-- 1. 初始身份选择大厅 (删除了猪猪和团长登录) -->
+    <div id="portal-screen" class="max-w-md mx-auto pt-24 px-4 fade-in">
         <h1 class="text-3xl font-extrabold text-center text-blue-600 mb-2 transition-colors">在外太空浮游查询</h1>
         <p class="text-center text-gray-400 text-sm mb-8 transition-colors">云端实时同步 · 全局历史可查 <span class="hidden" id="arisa-easter-egg" style="display:none;">( ˘•ω•˘ ) 哼，才不是特意为你做的呢</span></p>
         <div class="space-y-4">
             <button onclick="showScreen('buyer-screen')" class="portal-btn"><span class="portal-btn-icon">🔍</span><div><div class="portal-btn-title">团员自助查询</div><div class="portal-btn-sub">免登录 · 查看我的历史排单</div></div></button>
             <button onclick="showScreen('payment-apply-screen')" class="portal-btn"><span class="portal-btn-icon">💰</span><div><div class="portal-btn-title">我要交肾</div><div class="portal-btn-sub">按团期合并付款 · 上传截图</div></div></button>
             <button onclick="showScreen('shipping-apply-screen')" class="portal-btn"><span class="portal-btn-icon">📦</span><div><div class="portal-btn-title">申请排发 / 查快递</div><div class="portal-btn-sub">多选合并发货 · 查看快递单号</div></div></button>
-            <button onclick="showScreen('rank-screen')" class="portal-btn"><span class="portal-btn-icon">🐷</span><div><div class="portal-btn-title">！？猪猪？！</div><div class="portal-btn-sub">生成我的专属吃谷战斗力报告</div></div></button>
-            <div class="pt-4 mt-4"><button onclick="showScreen('login-screen')" class="portal-btn primary"><span class="portal-btn-icon">👑</span><div><div class="portal-btn-title">我是团长</div><div class="portal-btn-sub">登录后台管理系统</div></div></button></div>
         </div>
     </div>
-        
-            <!-- 比如它应该放在所有其他 script 的后面 -->
-    <script>
-        // 🌸 市谷有咲主题专属彩蛋 
-        const originalApplyTheme = applyTheme; 
-        applyTheme = function(themeKey) { 
-            originalApplyTheme(themeKey); 
-            const egg = document.getElementById('arisa-easter-egg'); 
-            if (egg) { 
-                if (themeKey === 'arisa') { 
-                    egg.style.display = 'inline'; 
-                } else { 
-                    egg.style.display = 'none'; 
-                } 
-            } 
-        };
-    </script> <!-- 👈 确保加上这个闭合标签！ -->
 
     <!-- 2. 团员自助查询端 -->
     <div id="buyer-screen" class="max-w-2xl mx-auto pt-8 px-4 hidden fade-in pb-12">
@@ -163,7 +150,7 @@
                         <input type="text" id="queryKeyInput" placeholder="例如: GUGU666" class="w-full border border-gray-300 rounded px-3 py-2 focus:border-blue-500 focus:outline-none">
                     </div>
                     <div>
-                        <label class="block text-sm text-gray-600 mb-1">你的CN</label>
+                        <label class="block text-sm text-gray-600 mb-1">你的买家 CN</label>
                         <input type="text" id="queryCnInput" placeholder="输入CN，支持部分模糊搜索..." class="w-full border border-gray-300 rounded px-3 py-2 focus:border-blue-500 focus:outline-none">
                     </div>
                     <button onclick="doBuyerSearch()" class="w-full bg-blue-500 text-white font-bold py-2 rounded shadow hover:bg-blue-600 transition mt-2">立即查询</button>
@@ -181,6 +168,7 @@
             </div>
         </div>
     </div>
+    
     <!-- ================= 团员交肾申请端 ================= -->
     <div id="payment-apply-screen" class="max-w-2xl mx-auto pt-8 px-4 hidden fade-in pb-12">
         <button onclick="showScreen('portal-screen')" class="text-gray-400 mb-4 hover:text-gray-600 block">← 返回首页</button>
@@ -289,4 +277,273 @@
     <!-- 查看详情弹窗 -->
     <div id="shipDetailModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
         <div class="bg-white rounded-lg p-5 w-full max-w-md shadow-xl">
-            <h3 class="text-lg font-bold mb-4 border-b
+            <h3 class="text-lg font-bold mb-4 border-b pb-2">📦 申请详情与反馈</h3>
+            <div id="shipDetailContent" class="space-y-3 text-sm text-gray-700 max-h-[70vh] overflow-y-auto"></div>
+            <div class="mt-6 flex justify-end">
+                <button onclick="closeShipDetail()" class="px-4 py-2 bg-blue-500 text-white rounded font-bold">关闭窗口</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. 团长登录端 / 注册 / 忘记密码 -->
+    <div id="login-screen" class="max-w-md mx-auto pt-20 px-4 hidden fade-in">
+        <button onclick="showScreen('portal-screen')" class="text-gray-400 mb-4 hover:text-gray-600">← 返回首页</button>
+        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">团长登录</h2>
+            <div class="space-y-4">
+                <input type="email" id="authEmail" placeholder="输入注册账号邮箱" class="w-full border border-gray-300 rounded px-3 py-2 focus:border-blue-500 focus:outline-none">
+                <input type="password" id="authPassword" placeholder="密码 (至少6位)" class="w-full border border-gray-300 rounded px-3 py-2 focus:border-blue-500 focus:outline-none">
+                <div class="flex justify-between items-center px-1">
+                    <button onclick="showScreen('register-screen')" class="text-sm text-gray-500 hover:text-blue-500">无账号? 注册</button>
+                    <button onclick="showScreen('forgot-screen')" class="text-sm text-blue-500 hover:text-blue-700">忘记密码？</button>
+                </div>
+                <div class="pt-2"><button onclick="handleLogin()" class="w-full bg-blue-500 text-white font-bold py-3 rounded shadow hover:bg-blue-600 transition">登录</button></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="register-screen" class="max-w-md mx-auto pt-20 px-4 hidden fade-in">
+        <button onclick="showScreen('login-screen')" class="text-gray-400 mb-4 hover:text-gray-600">← 返回登录</button>
+        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">账号注册</h2>
+            <div class="space-y-4">
+                <input type="email" id="regEmail" placeholder="输入常用邮箱 (用于接收验证码)" class="w-full border border-gray-300 rounded px-3 py-2 focus:border-blue-500 focus:outline-none">
+                <input type="password" id="regPassword" placeholder="设置密码 (至少6位)" class="w-full border border-gray-300 rounded px-3 py-2 focus:border-blue-500 focus:outline-none">
+                <input type="password" id="regConfirmPassword" placeholder="确认密码" class="w-full border border-gray-300 rounded px-3 py-2 focus:border-blue-500 focus:outline-none">
+                <div class="pt-2"><button onclick="handleRegisterSubmit()" class="w-full bg-green-500 text-white font-bold py-3 rounded shadow hover:bg-green-600 transition">获取注册验证码</button></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="verify-signup-screen" class="max-w-md mx-auto pt-20 px-4 hidden fade-in">
+        <button onclick="showScreen('register-screen')" class="text-gray-400 mb-4 hover:text-gray-600">← 返回重新注册</button>
+        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <h2 class="text-2xl font-bold text-gray-800 mb-2 text-center">验证邮箱</h2>
+            <p class="text-xs text-green-600 text-center mb-6">注册验证码已发送至您的邮箱，请查收</p>
+            <div class="space-y-4">
+                <input type="text" id="verifySignupCodeInput" placeholder="输入邮件中的 6位 验证码" class="w-full border border-gray-300 rounded px-3 py-2 focus:border-blue-500 focus:outline-none tracking-widest">
+                <div class="pt-2"><button onclick="handleVerifySignupCode()" class="w-full bg-green-500 text-white font-bold py-3 rounded shadow hover:bg-green-600 transition">验证并登录</button></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="forgot-screen" class="max-w-md mx-auto pt-20 px-4 hidden fade-in">
+        <button onclick="showScreen('login-screen')" class="text-gray-400 mb-4 hover:text-gray-600">← 返回登录</button>
+        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <h2 class="text-2xl font-bold text-gray-800 mb-2 text-center">找回密码</h2>
+            <p class="text-xs text-gray-500 text-center mb-6">请输入你注册时的邮箱，我们将发送重置验证码给你</p>
+            <div class="space-y-4">
+                <input type="email" id="forgotEmail" placeholder="输入注册邮箱" class="w-full border border-gray-300 rounded px-3 py-2 focus:border-blue-500 focus:outline-none">
+                <div class="pt-2"><button onclick="handleSendResetCode()" class="w-full bg-blue-500 text-white font-bold py-3 rounded shadow hover:bg-blue-600 transition">发送验证码</button></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="reset-screen" class="max-w-md mx-auto pt-20 px-4 hidden fade-in">
+        <button onclick="showScreen('login-screen')" class="text-gray-400 mb-4 hover:text-gray-600">← 取消重置，去登录</button>
+        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <h2 class="text-2xl font-bold text-gray-800 mb-2 text-center">设置新密码</h2>
+            <p class="text-xs text-green-600 text-center mb-6">验证码已发送至邮箱，请查收</p>
+            <div class="space-y-4">
+                <input type="text" id="resetCodeInput" placeholder="输入邮件中的 6位 验证码" class="w-full border border-gray-300 rounded px-3 py-2 focus:border-blue-500 focus:outline-none tracking-widest">
+                <input type="password" id="resetNewPassword" placeholder="输入新的密码 (至少6位)" class="w-full border border-gray-300 rounded px-3 py-2 focus:border-blue-500 focus:outline-none">
+                <div class="pt-2"><button onclick="handleDoResetPassword()" class="w-full bg-red-500 text-white font-bold py-3 rounded shadow hover:bg-red-600 transition">确定重置并登录</button></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. 团长管理大盘 -->
+    <div id="dashboard-screen" class="hidden">
+        <div class="max-w-7xl mx-auto pt-4 md:pt-6 px-2 md:px-4 pb-12 fade-in">
+            <div class="flex justify-between items-start md:items-center mb-4 md:mb-6 border-b pb-3 flex-col md:flex-row gap-3">
+                <h1 class="text-2xl font-bold text-blue-600 tracking-wide">排单云后台</h1>
+                <div class="text-xs text-gray-500 flex flex-col md:items-end w-full md:w-auto gap-2">
+                    <div class="flex items-center justify-between md:justify-end w-full gap-3 bg-gray-50 p-2 rounded border border-gray-200 shadow-sm">
+                        <span id="syncStatusText" class="text-green-500 font-bold flex items-center gap-1 text-sm">☁️ 云端已同步</span>
+                        <button onclick="forceRefreshData()" class="bg-blue-500 text-white px-3 py-1.5 rounded hover:bg-blue-600 transition shadow text-xs font-bold flex items-center gap-1">🔄 拉取最新数据</button>
+                    </div>
+                    <div class="flex justify-end items-center gap-3 mt-1 w-full"><span>已登录管理模式</span><button onclick="handleLogout()" class="text-red-500 hover:underline">退出登录</button></div>
+                </div>
+            </div>
+
+            <div class="flex md:justify-center flex-nowrap md:flex-wrap gap-2 mb-4 md:mb-6 pb-2 overflow-x-auto hide-scrollbar whitespace-nowrap">
+                <button onclick="switchTab('input')" id="tab-input" class="px-3 md:px-4 py-2 text-sm md:text-base tab-active">录入排表</button>
+                <button onclick="switchTab('images')" id="tab-images" class="px-3 md:px-4 py-2 text-sm md:text-base text-gray-500 hover:text-blue-500">柄图管理</button>
+                <button onclick="switchTab('manage')" id="tab-manage" class="px-3 md:px-4 py-2 text-sm md:text-base text-gray-500 hover:text-blue-500">订单管理</button>
+                <button onclick="switchTab('schedule')" id="tab-schedule" class="px-3 md:px-4 py-2 text-sm md:text-base text-gray-500 hover:text-blue-500">排表显示</button>
+                <button onclick="switchTab('finance')" id="tab-finance" class="px-3 md:px-4 py-2 text-sm md:text-base text-gray-500 hover:text-blue-500">肾表统计</button>
+                <button onclick="switchTab('payment')" id="tab-payment" class="px-3 md:px-4 py-2 text-sm md:text-base text-gray-500 hover:text-yellow-600">💰 交肾工作台</button>
+                <button onclick="switchTab('shipping')" id="tab-shipping" class="px-3 md:px-4 py-2 text-sm md:text-base text-gray-500 hover:text-green-600">📦 排发工作台</button>
+                <button onclick="switchTab('cloud')" id="tab-cloud" class="px-3 md:px-4 py-2 text-sm md:text-base text-purple-500 font-bold hover:text-purple-600">云端设置</button>
+            </div>
+
+            <div id="page-input" class="space-y-4 md:space-y-6">
+                <div class="bg-white p-4 md:p-6 rounded shadow-sm border border-gray-200">
+                    <h2 class="text-base md:text-lg font-bold mb-4 border-b pb-2 text-gray-800">快捷手动录入</h2>
+                    <form id="itemForm" class="grid grid-cols-1 md:grid-cols-5 gap-3 md:gap-4">
+                        <div class="col-span-1 md:col-span-1"><label class="block text-sm text-gray-600 mb-1">团期</label><input type="text" id="inBatch" list="batchOptions" placeholder="输入新团期" required class="w-full border border-gray-300 rounded px-3 py-2 text-sm"><datalist id="batchOptions"></datalist></div>
+                        <div class="col-span-1 md:col-span-1"><label class="block text-sm text-gray-600 mb-1">商品种类</label><input type="text" id="inCategory" required class="w-full border border-gray-300 rounded px-3 py-2 text-sm"></div>
+                        <div class="col-span-1 md:col-span-1"><label class="block text-sm text-gray-600 mb-1">角色款式</label><input type="text" id="inCharacter" required class="w-full border border-gray-300 rounded px-3 py-2 text-sm"></div>
+                        <div class="col-span-1 md:col-span-1"><label class="block text-sm text-gray-600 mb-1">单价 (元)</label><input type="number" step="0.01" id="inPrice" required class="w-full border border-gray-300 rounded px-3 py-2 text-sm"></div>
+                        <div class="col-span-1 md:col-span-1"><label class="block text-sm font-bold text-blue-600 mb-1">每行默认数量倍数</label><input type="number" id="inMultiplier" value="1" min="1" required class="w-full border border-blue-300 bg-blue-50 rounded px-3 py-2 text-sm"></div>
+                        <div class="col-span-1 md:col-span-5 mt-2"><label class="block text-sm text-gray-600 mb-1">批量粘贴买家 CN (每行一个)</label><textarea id="inCNs" rows="5" required class="w-full border border-gray-300 rounded px-3 py-2 text-sm"></textarea></div>
+                        <div class="col-span-1 md:col-span-5 flex justify-end mt-2"><button type="submit" class="w-full md:w-auto bg-blue-500 text-white px-6 py-2 rounded text-sm hover:bg-blue-600 transition">一键录入 (默认未交肾)</button></div>
+                    </form>
+                </div>
+                <div class="bg-white p-4 md:p-6 rounded shadow-sm border border-gray-200">
+                    <h2 class="text-base md:text-lg font-bold mb-4 border-b pb-2 text-gray-800">通过 Excel/CSV 批量导入</h2>
+                    <div class="flex flex-col md:flex-row md:flex-wrap items-stretch md:items-center gap-3 pt-2">
+                        <button onclick="downloadTemplate()" class="bg-gray-100 border border-gray-300 text-gray-700 px-4 py-2 rounded text-sm hover:bg-gray-200 transition">📥 下载标准导入模板</button>
+                        <select id="importEncoding" class="border border-gray-300 rounded px-3 py-2 text-sm"><option value="auto">自动识别编码(仅对CSV有效)</option><option value="gbk">GBK (Excel默认/乱码请选这个)</option><option value="utf-8">UTF-8 (国际标准)</option></select>
+                        <input type="file" id="importFile" accept=".csv, .xlsx, .xls" class="hidden" onchange="importFileHandler(event)">
+                        <button onclick="document.getElementById('importFile').click()" class="bg-green-500 text-white px-4 py-2 rounded text-sm hover:bg-green-600 transition shadow">📤 导入 Excel/CSV 数据</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 省略的部分后台页 -->
+            <div id="page-images" class="hidden"></div>
+            <div id="page-manage" class="hidden"></div>
+            <div id="page-schedule" class="hidden"></div>
+            <div id="page-finance" class="hidden"></div>
+            <div id="page-payment" class="hidden"></div>
+            <div id="page-shipping" class="hidden"></div>
+            <div id="page-cloud" class="hidden"></div>
+        </div>
+    </div>
+
+    <!-- ================= 核心 JS 逻辑 ================= -->
+    <script>
+        function generateSafeId() { return Date.now().toString(36) + Math.random().toString(36).substr(2, 5); }
+
+        let groupData = [];
+        let imageUrlData = {};
+        let currentUser = null;
+        let resetTargetEmail = ''; 
+        let registerTargetEmail = ''; 
+
+        function showLoading(text="处理中...") { document.getElementById('loadingText').innerText=text; document.getElementById('globalLoading').classList.remove('hidden'); }
+        function hideLoading() { document.getElementById('globalLoading').classList.add('hidden'); }
+
+        function showScreen(screenId) {
+            ['portal-screen', 'buyer-screen', 'shipping-apply-screen', 'payment-apply-screen', 'login-screen', 'register-screen', 'verify-signup-screen', 'forgot-screen', 'reset-screen', 'dashboard-screen', 'rank-screen'].forEach(id => {
+                let el = document.getElementById(id);
+                if(el) el.classList.add('hidden');
+            });
+            let target = document.getElementById(screenId);
+            if(target) target.classList.remove('hidden');
+        }
+
+        db.auth.getSession().then(({ data: { session } }) => {
+            if (session) { 
+                currentUser = session.user; 
+                initCloudData(); 
+            } else {
+                showScreen('portal-screen');
+            }
+        });
+
+        async function handleLogin() {
+            let email = document.getElementById('authEmail').value.trim();
+            let pwd = document.getElementById('authPassword').value;
+            if(!email || !pwd) return alert('请输入账号和密码');
+            showLoading('登录中...');
+            try {
+                const { data, error } = await db.auth.signInWithPassword({ email, password: pwd });
+                hideLoading();
+                if(error) { alert('登录失败: ' + error.message); return; }
+                currentUser = data.user; 
+                initCloudData();
+            } catch (err) { hideLoading(); alert('连接云端失败！'); }
+        }
+
+        async function handleLogout() {
+            await db.auth.signOut(); 
+            currentUser = null; 
+            groupData = []; 
+            imageUrlData = {}; 
+            showScreen('portal-screen');
+        }
+
+        async function initCloudData() {
+            try {
+                showLoading('正在拉取云端数据...');
+                const { data, error } = await db.from('leader_data').select('*').eq('user_id', currentUser.id).single();
+                if(data) {
+                    groupData = data.group_data || [];
+                    imageUrlData = data.image_data || {};
+                    const keyInput = document.getElementById('settingQueryKey');
+                    if(keyInput) keyInput.value = data.query_key || '';
+                } else { 
+                    await db.from('leader_data').insert({ user_id: currentUser.id, group_data: [], image_data: {} }); 
+                }
+            } catch(e) { console.log(e); } 
+            finally { 
+                hideLoading(); 
+                showScreen('dashboard-screen'); 
+                if(typeof updateBatchDatalist === 'function') updateBatchDatalist(); 
+                if(typeof switchTab === 'function') switchTab('input'); 
+            }
+        }
+
+        async function forceRefreshData() {
+            if(!currentUser) return;
+            await initCloudData();
+        }
+
+        let saveTimeout = null;
+        function saveDataLocalOnly() { 
+            localStorage.setItem('groupData_V4', JSON.stringify(groupData)); 
+            localStorage.setItem('imageUrlData_V1', JSON.stringify(imageUrlData)); 
+        }
+        
+        function saveData() { 
+            saveDataLocalOnly(); 
+            syncToCloud(); 
+        }
+
+        async function syncToCloud() {
+            if(!currentUser) return;
+            clearTimeout(saveTimeout);
+            saveTimeout = setTimeout(async () => {
+                try {
+                    await db.from('leader_data').update({ group_data: groupData, image_data: imageUrlData }).eq('user_id', currentUser.id);
+                } catch (e) {
+                    console.error("云端同步失败", e);
+                }
+            }, 1000); 
+        }
+
+        function updateBatchDatalist() {}
+        function switchTab(tab) {}
+        function doBuyerSearch() { alert('查询功能需要补充完整业务逻辑才能使用哦！'); }
+        function doPaymentSearch() {}
+        function doShippingSearch() {}
+        function doRankSearch() {}
+        function handleRegisterSubmit() {}
+        function handleVerifySignupCode() {}
+        function handleSendResetCode() {}
+        function handleDoResetPassword() {}
+        function downloadTemplate() {}
+        function importFileHandler() {}
+        
+        document.getElementById('itemForm')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const batch = document.getElementById('inBatch').value.trim();
+            const category = document.getElementById('inCategory').value.trim();
+            const character = document.getElementById('inCharacter').value.trim();
+            const price = parseFloat(document.getElementById('inPrice').value);
+            const names = document.getElementById('inCNs').value.split(/[\r\n]+/).map(n => n.trim()).filter(n => n !== '');
+            
+            if(names.length === 0) return alert('请输入买家CN');
+            names.forEach(cn => {
+                groupData.push({ id: generateSafeId(), batch, category, character, price, count: 1, cn, status: '未到货', paidStatus: '未交' });
+            });
+            saveData(); 
+            document.getElementById('inCharacter').value = ''; 
+            document.getElementById('inCNs').value = ''; 
+            alert('录入成功！');
+        });
+    </script>
+</body>
+</html>
