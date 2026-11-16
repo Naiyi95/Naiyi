@@ -77,10 +77,11 @@
     
     <!-- 🌟 全局控制中心 (右上角) -->
     <div class="fixed top-4 right-4 z-[999] font-sans flex items-center gap-2">
-        <!-- 团长登录按钮 (移到这里) -->
-        <button onclick="showScreen('login-screen')" id="top-login-btn" class="bg-white border border-gray-200 shadow-sm text-gray-600 px-4 py-2 rounded-full hover:bg-gray-50 transition text-sm font-bold flex items-center gap-1">
-            <span>👑</span> <span class="hidden sm:inline">团长登录</span>
-        </button>
+       <!-- 团长登录按钮 (已替换为像素图) -->
+<button onclick="showScreen('login-screen')" id="top-login-btn" class="bg-white border border-gray-200 shadow-sm text-gray-600 px-4 py-2 rounded-full hover:bg-gray-50 transition text-sm font-bold flex items-center gap-2">
+    <img src="https://img.cdn1.vip/i/6afaef0171cd5_1794830081.png" class="w-5 h-5 object-contain pointer-events-none" style="image-rendering: pixelated;" alt="团长登录">
+    <span class="hidden sm:inline pointer-events-none">团长登录</span>
+</button>
 
         <!-- 主题切换按钮 -->
         <button onclick="document.getElementById('themePanel').classList.toggle('hidden')" class="bg-white border border-gray-200 shadow-sm text-gray-600 px-4 py-2 rounded-full hover:bg-gray-50 transition flex items-center gap-2 text-sm font-bold">
@@ -129,11 +130,31 @@
     <!-- 1. 初始身份选择大厅 (删除了猪猪和团长登录) -->
     <div id="portal-screen" class="max-w-md mx-auto pt-24 px-4 fade-in">
         <h1 class="text-3xl font-extrabold text-center text-blue-600 mb-2 transition-colors">在外太空浮游查询</h1>
-        <p class="text-center text-gray-400 text-sm mb-8 transition-colors">云端实时同步 · 全局历史可查 <span class="hidden" id="arisa-easter-egg" style="display:none;">( ˘•ω•˘ ) 哼，才不是特意为你做的呢</span></p>
+        <p class="text-center text-gray-400 text-sm mb-8 transition-colors">感谢参团·表格统一周六更新<span id="arisa-easter-egg" style="display: none;">( ˘•ω•˘ ) 哼，才不是特意为你做的呢</span>
         <div class="space-y-4">
-            <button onclick="showScreen('buyer-screen')" class="portal-btn"><span class="portal-btn-icon">🔍</span><div><div class="portal-btn-title">团员自助查询</div><div class="portal-btn-sub">免登录 · 查看我的历史排单</div></div></button>
-            <button onclick="showScreen('payment-apply-screen')" class="portal-btn"><span class="portal-btn-icon">💰</span><div><div class="portal-btn-title">我要交肾</div><div class="portal-btn-sub">按团期合并付款 · 上传截图</div></div></button>
-            <button onclick="showScreen('shipping-apply-screen')" class="portal-btn"><span class="portal-btn-icon">📦</span><div><div class="portal-btn-title">申请排发 / 查快递</div><div class="portal-btn-sub">多选合并发货 · 查看快递单号</div></div></button>
+            <button onclick="showScreen('buyer-screen')" class="portal-btn">
+    <!-- 加上了 pointer-events-none，确保点击头像也能触发按钮 -->
+    <img src="https://img.cdn1.vip/i/6afaeaa1441ea_1794828961.png" class="portal-btn-icon  pointer-events-none" style="image-rendering: pixelated;" alt="查询">
+    
+    <div class="pointer-events-none">
+        <div class="portal-btn-title">团员自助查询</div>
+        <div class="portal-btn-sub">免登录 · 查看我的历史排单</div>
+    </div>
+</button>
+            <button onclick="showScreen('payment-apply-screen')" class="portal-btn">
+    <img src="https://img.cdn1.vip/i/6afaef0142e31_1794830081.png" class="portal-btn-icon pointer-events-none" style="image-rendering: pixelated;" alt="交肾">
+    <div class="pointer-events-none">
+        <div class="portal-btn-title">我要交肾</div>
+        <div class="portal-btn-sub">按团期合并付款 · 上传截图</div>
+    </div>
+</button>
+            <button onclick="showScreen('shipping-apply-screen')" class="portal-btn">
+    <img src="https://img.cdn1.vip/i/6afaef0158542_1794830081.png" class="portal-btn-icon pointer-events-none" style="image-rendering: pixelated;" alt="排发">
+    <div class="pointer-events-none">
+        <div class="portal-btn-title">申请排发 / 查快递</div>
+        <div class="portal-btn-sub">多选合并发货 · 查看快递单号</div>
+    </div>
+</button>
         </div>
     </div>
 
@@ -453,7 +474,7 @@
                             <span class="text-gray-700 font-bold text-sm whitespace-nowrap" id="manageTitle">请选择团期</span>
                         </div>
                         <div class="flex-1 min-w-0">
-                            <input type="text" id="manageSearchInput" oninput="handleSearch()" placeholder="🔍 搜索买家CN、商品..." class="w-full border border-gray-300 rounded-full px-3 py-1.5 text-sm">
+                            <input type="text" id="manageSearchInput" oninput="handleSearch()" placeholder="🔍 搜索CN、商品..." class="w-full border border-gray-300 rounded-full px-3 py-1.5 text-sm">
                         </div>
                         <div class="flex gap-2 flex-wrap">
                             <button onclick="exportCSV()" class="bg-gray-100 text-gray-700 border border-gray-300 px-3 py-1.5 rounded text-xs font-bold hover:bg-gray-200 transition">💾 导出数据备份</button>
@@ -1151,7 +1172,7 @@
         document.getElementById('itemForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const batch = document.getElementById('inBatch').value.trim(), category = document.getElementById('inCategory').value.trim(), character = document.getElementById('inCharacter').value.trim(), price = parseFloat(document.getElementById('inPrice').value), multiplier = parseInt(document.getElementById('inMultiplier').value) || 1, names = document.getElementById('inCNs').value.split(/[\r\n]+/).map(n => n.trim()).filter(n => n !== '');
-            if(names.length === 0) return alert('请输入买家CN');
+            if(names.length === 0) return alert('请输入CN');
             let countMap = {}; names.forEach(n => countMap[n] = (countMap[n] || 0) + multiplier);
             for (const cn in countMap) groupData.push({ id: generateSafeId(), batch, category, character, price, count: countMap[cn], cn, status: '未到货', paidStatus: '未交' });
             saveData(); document.getElementById('inCharacter').value = ''; document.getElementById('inCNs').value = ''; alert('录入成功！');
