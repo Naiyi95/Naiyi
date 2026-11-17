@@ -504,6 +504,7 @@
                                     <th class="py-2 px-2 border-b max-w-[100px]">买家 CN</th>
                                     <th class="py-2 px-2 border-b">金额明细</th>
                                     <th class="py-2 px-2 border-b w-20">到货状态</th>
+                                    <th class="py-2 px-2 border-b min-w-[150px]">到货时间 / 囤货</th>
                                     <th class="py-2 px-2 border-b w-16">交肾状态</th>
                                     <th class="py-2 px-2 border-b w-20">操作</th>
                                 </tr>
@@ -670,7 +671,7 @@
     </div>
 
     <div id="batchEditModal" class="hidden fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 p-4">
-        <div class="bg-white rounded p-5 w-full max-w-sm shadow-lg"><h3 class="text-lg font-bold mb-4 text-gray-800">批量修改选中项</h3><div class="space-y-4 text-sm"><div><label class="block mb-1">交肾状态：</label><select id="batchEditPaid" class="w-full border rounded p-2"><option value="">-- 不修改 --</option><option value="未交">未交</option><option value="已交">已交</option></select></div><div><label class="block mb-1">到货状态：</label><select id="batchEditStatus" class="w-full border rounded p-2"><option value="">-- 不修改 --</option><option value="未到货">未到货</option><option value="已到货">已到货</option><option value="已排发">已排发</option></select></div></div><div class="mt-6 flex justify-end gap-2"><button onclick="closeBatchEditModal()" class="px-4 py-1.5 border rounded">取消</button><button onclick="saveBatchEdit()" class="px-4 py-1.5 bg-indigo-500 text-white rounded">确认</button></div></div>
+        <div class="bg-white rounded p-5 w-full max-w-sm shadow-lg"><h3 class="text-lg font-bold mb-4 text-gray-800">批量修改选中项</h3><div class="space-y-4 text-sm"><div><label class="block mb-1">交肾状态：</label><select id="batchEditPaid" class="w-full border rounded p-2"><option value="">-- 不修改 --</option><option value="未交">未交</option><option value="已交">已交</option></select></div><div><label class="block mb-1">到货状态：</label><select id="batchEditStatus" class="w-full border rounded p-2"><option value="">-- 不修改 --</option><option value="未到货">未到货</option><option value="已到货">已到货</option><option value="已排发">已排发</option></select></div><div><label class="block mb-1">团期（活动名称）：</label><input type="text" id="batchEditBatch" class="w-full border rounded p-2" placeholder="留空则不修改团期"></div><div><label class="block mb-1">到货时间：</label><input type="date" id="batchEditArrivalDate" class="w-full border rounded p-2"><p class="text-xs text-gray-400 mt-1">留空表示不修改；选择日期后统一应用到选中订单。</p><label class="flex items-center gap-2 mt-2 text-xs text-gray-600"><input type="checkbox" id="batchClearArrivalDate"> 清空选中订单的到货时间</label></div></div><div class="mt-6 flex justify-end gap-2"><button onclick="closeBatchEditModal()" class="px-4 py-1.5 border rounded">取消</button><button onclick="saveBatchEdit()" class="px-4 py-1.5 bg-indigo-500 text-white rounded">确认</button></div></div>
     </div>
 
 <!-- 🌟 复用历史柄图弹窗 -->
@@ -691,7 +692,7 @@
 
 <!-- 编辑排单信息弹窗 -->
 <div id="editModal" class="hidden fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 p-4">
-    <div class="bg-white rounded p-5 w-full max-w-sm shadow-lg max-h-[90vh] overflow-y-auto"><h3 class="text-lg font-bold mb-4 text-gray-800">编辑排单信息</h3><div class="space-y-3 text-sm"><input type="hidden" id="editId"><div><label class="block mb-1">买家 CN</label><input type="text" id="editCn" class="w-full border rounded px-2 py-1.5"></div><div><label class="block mb-1">团期</label><input type="text" id="editBatch" class="w-full border rounded px-2 py-1.5"></div><div><label class="block mb-1">商品种类</label><input type="text" id="editCategory" class="w-full border rounded px-2 py-1.5"></div><div><label class="block mb-1">角色款式</label><input type="text" id="editCharacter" class="w-full border rounded px-2 py-1.5"></div><div class="flex gap-2"><div class="flex-1"><label class="block mb-1">单价</label><input type="number" step="0.01" id="editPrice" class="w-full border rounded px-2 py-1.5"></div><div class="flex-1"><label class="block mb-1">数量</label><input type="number" id="editCount" class="w-full border rounded px-2 py-1.5"></div></div><div><label class="block mb-1">到货状态</label><select id="editStatus" class="w-full border rounded px-2 py-1.5"><option value="未到货">未到货</option><option value="已到货">已到货</option><option value="已排发">已排发</option></select></div><div><label class="block mb-1">交肾状态</label><select id="editPaid" class="w-full border rounded px-2 py-1.5"><option value="未交">未交</option><option value="已交">已交</option></select></div></div><div class="mt-6 flex justify-end gap-2"><button onclick="closeEditModal()" class="px-4 py-1.5 border rounded">取消</button><button onclick="saveEdit()" class="px-4 py-1.5 bg-blue-500 text-white rounded">保存</button></div></div>
+    <div class="bg-white rounded p-5 w-full max-w-sm shadow-lg max-h-[90vh] overflow-y-auto"><h3 class="text-lg font-bold mb-4 text-gray-800">编辑排单信息</h3><div class="space-y-3 text-sm"><input type="hidden" id="editId"><div><label class="block mb-1">买家 CN</label><input type="text" id="editCn" class="w-full border rounded px-2 py-1.5"></div><div><label class="block mb-1">团期</label><input type="text" id="editBatch" class="w-full border rounded px-2 py-1.5"></div><div><label class="block mb-1">商品种类</label><input type="text" id="editCategory" class="w-full border rounded px-2 py-1.5"></div><div><label class="block mb-1">角色款式</label><input type="text" id="editCharacter" class="w-full border rounded px-2 py-1.5"></div><div class="flex gap-2"><div class="flex-1"><label class="block mb-1">单价</label><input type="number" step="0.01" id="editPrice" class="w-full border rounded px-2 py-1.5"></div><div class="flex-1"><label class="block mb-1">数量</label><input type="number" id="editCount" class="w-full border rounded px-2 py-1.5"></div></div><div><label class="block mb-1">到货状态</label><select id="editStatus" class="w-full border rounded px-2 py-1.5"><option value="未到货">未到货</option><option value="已到货">已到货</option><option value="已排发">已排发</option></select></div><div><label class="block mb-1">到货时间</label><input type="date" id="editArrivalDate" class="w-full border rounded px-2 py-1.5"><p class="text-xs text-gray-400 mt-1">囤货天数从此日期开始计算，满 150 天显示“掉落”。</p></div><div><label class="block mb-1">交肾状态</label><select id="editPaid" class="w-full border rounded px-2 py-1.5"><option value="未交">未交</option><option value="已交">已交</option></select></div></div><div class="mt-6 flex justify-end gap-2"><button onclick="closeEditModal()" class="px-4 py-1.5 border rounded">取消</button><button onclick="saveEdit()" class="px-4 py-1.5 bg-blue-500 text-white rounded">保存</button></div></div>
 </div>
 
         <script>
@@ -708,6 +709,8 @@
 
         let currentEditImageKey = '';
         let currentUser = null;
+        let workspaceDataId = null; // 唯一共享数据行的真实 Auth UUID
+        let workspaceRole = null; // owner 或 admin，由 Supabase workspace_members 读取
         let resetTargetEmail = ''; 
         let registerTargetEmail = ''; 
         let draggedItemRowId = null;
@@ -723,9 +726,11 @@
             document.getElementById(screenId).classList.remove('hidden');
         }
 
-        function updateSyncStatus(status) {
+        function updateSyncStatus(status, errorDetail = '') {
             const statusEl = document.getElementById('syncStatusText');
             if(!statusEl) return;
+            statusEl.title = '';
+            statusEl.onclick = null;
             if(status === 'saving') {
                 statusEl.innerHTML = '⏳ 正在保存...';
                 statusEl.className = 'text-yellow-600 font-bold flex items-center gap-1 text-sm';
@@ -733,17 +738,69 @@
                 statusEl.innerHTML = '☁️ 云端已同步';
                 statusEl.className = 'text-green-500 font-bold flex items-center gap-1 text-sm';
             } else if(status === 'error') {
-                statusEl.innerHTML = '❌ 同步失败';
-                statusEl.className = 'text-red-500 font-bold flex items-center gap-1 text-sm';
+                statusEl.innerHTML = '❌ 同步失败（点此查看原因）';
+                statusEl.className = 'text-red-500 font-bold flex items-center gap-1 text-sm cursor-pointer';
+                statusEl.title = errorDetail || '没有收到具体错误信息';
+                statusEl.onclick = () => alert('云端同步失败的详细原因：\n\n' + (errorDetail || '没有收到具体错误信息') + '\n\n请把这段错误内容发给网页维护者。');
             }
         }
 
-        // 🌟 核心：根据是否加入共享，决定读写哪个空间
+        // 全部已注册管理员共用团长账号对应的唯一数据行；绝不把邀请码当 UUID。
         function getDataIdentifier() {
-            if (localStorage.getItem('shared_secret_key') === '1012') {
-                return 'master_key_1012';
+            if (!currentUser) throw new Error('请先登录后再访问管理数据');
+            if (!workspaceDataId) throw new Error('共享空间尚未初始化，请检查 Supabase 迁移 SQL');
+            return workspaceDataId;
+        }
+
+        async function resolveWorkspaceDataId() {
+            const { data, error } = await db.rpc('get_workspace_owner_id');
+            if (error) throw new Error('获取共享空间失败：' + (error.message || '数据库函数不可用'));
+            const id = typeof data === 'string' ? data : (data && (data.owner_id || data.id));
+            if (!id || !/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(id)) {
+                throw new Error('数据库未返回有效的团长 UUID');
             }
-            return currentUser.id;
+            workspaceDataId = id;
+
+            // 成员表已有 authenticated 成员 SELECT 策略；角色以数据库记录为准，不信任前端邮箱判断。
+            const { data: member, error: memberError } = await db
+                .from('workspace_members')
+                .select('role')
+                .eq('user_id', currentUser.id)
+                .single();
+            if (memberError) throw new Error('读取后台成员权限失败：' + (memberError.message || '无法确认身份'));
+            if (!member || !['owner', 'admin'].includes(member.role)) {
+                throw new Error('当前账号不是共享后台成员');
+            }
+            workspaceRole = member.role;
+            applyWorkspaceRoleUI();
+            return id;
+        }
+
+        // 保留原有云端设置区域和控件，仅限制普通管理员修改查询密钥。
+        function applyWorkspaceRoleUI() {
+            const keyInput = document.getElementById('settingQueryKey');
+            const keyButton = document.querySelector('#page-cloud button[onclick="saveQueryKey()"]');
+            if (!keyInput || !keyButton) return;
+            const isOwner = workspaceRole === 'owner';
+            keyInput.disabled = !isOwner;
+            keyButton.disabled = !isOwner;
+            if (!isOwner) {
+                keyInput.value = '';
+                keyInput.placeholder = '仅团长可查看和修改全局查询密钥';
+                keyInput.setAttribute('aria-label', '仅团长可查看和修改全局查询密钥');
+                keyButton.title = '仅团长可以修改访客查询密钥';
+            } else {
+                keyInput.placeholder = '设置一个方便好记的密码';
+                keyInput.removeAttribute('aria-label');
+                keyButton.removeAttribute('title');
+            }
+        }
+
+        // 访客仅通过密钥调用受控查询函数，不直接获得 leader_data 表的匿名读取权限。
+        async function lookupPublicWorkspace(queryKey, cn = null, mode = 'buyer') {
+            const { data, error } = await db.rpc('public_lookup_workspace', { p_query_key: queryKey, p_cn: cn, p_mode: mode });
+            if (error) throw error;
+            return Array.isArray(data) ? (data[0] || null) : data;
         }
 
         async function forceRefreshData() {
@@ -756,7 +813,7 @@
                 if(data) {
                     groupData = data.group_data || [];
                     imageUrlData = data.image_data || {};
-                    document.getElementById('settingQueryKey').value = data.query_key || '';
+                    document.getElementById('settingQueryKey').value = workspaceRole === 'owner' ? (data.query_key || '') : '';
                     saveDataLocalOnly(); updateBatchDatalist();
                     let activeTabBtn = document.querySelector('.tab-active');
                     if(activeTabBtn) { switchTab(activeTabBtn.id.replace('tab-', '')); }
@@ -798,11 +855,10 @@
 
             showLoading('发送验证码中...');
             try {
-                const { data, error } = await db.auth.signUp({ email, password: pwd });
+                const { data, error } = await db.auth.signUp({ email, password: pwd, options: { data: { workspace_registration_code: secretKey } } });
                 hideLoading();
                 if(error) alert('注册失败: ' + error.message);
                 else { 
-                    localStorage.setItem('shared_secret_key', secretKey);
                     registerTargetEmail = email; 
                     showScreen('verify-signup-screen'); 
                 }
@@ -849,23 +905,33 @@
         }
 
         async function handleLogout() {
-            await db.auth.signOut(); currentUser = null; groupData = []; imageUrlData = {}; showScreen('portal-screen');
+            await db.auth.signOut(); currentUser = null; workspaceDataId = null; workspaceRole = null; groupData = []; imageUrlData = {}; showScreen('portal-screen');
         }
 
         // 🌟 核心：拉取数据时使用共享判断
         async function initCloudData() {
+            showLoading('正在连接共享云端空间...');
             try {
-                showLoading('正在拉取数据...');
+                await resolveWorkspaceDataId();
                 const identifier = getDataIdentifier();
                 const { data, error } = await db.from('leader_data').select('*').eq('user_id', identifier).single();
-                if(data) {
-                    groupData = data.group_data || []; imageUrlData = data.image_data || {};
-                    document.getElementById('settingQueryKey').value = data.query_key || '';
-                } else { 
-                    await db.from('leader_data').insert({ user_id: identifier, group_data: [], image_data: {} }); 
-                }
-            } catch(e) { console.log(e); } 
-            finally { hideLoading(); showScreen('dashboard-screen'); updateBatchDatalist(); switchTab('input'); }
+                if (error) throw error;
+                if (!data) throw new Error('共享数据行不存在。请先执行配套 SQL，并确认团长账号已注册。');
+                groupData = data.group_data || [];
+                imageUrlData = data.image_data || {};
+                const keyInput = document.getElementById('settingQueryKey');
+                if (keyInput) keyInput.value = workspaceRole === 'owner' ? (data.query_key || '') : '';
+                saveDataLocalOnly();
+                showScreen('dashboard-screen');
+                updateBatchDatalist();
+                switchTab('input');
+                updateSyncStatus('saved');
+            } catch(e) {
+                console.error('[共享空间初始化失败]', e);
+                alert('共享云端连接失败：\n' + (e.message || e) + '\n\n请先执行随包的 supabase_shared_workspace.sql。');
+                showScreen('portal-screen');
+                updateSyncStatus('error', e.message || String(e));
+            } finally { hideLoading(); }
         }
 
         let saveTimeout = null;
@@ -876,18 +942,33 @@
             saveTimeout = setTimeout(async () => {
                 try {
                     const identifier = getDataIdentifier();
-                    const { data: cloudData } = await db.from('leader_data').select('image_data').eq('user_id', identifier).single();
+                    const { data: cloudData, error: readError } = await db.from('leader_data').select('image_data').eq('user_id', identifier).single();
+                    if (readError && readError.code !== 'PGRST116') throw readError;
                     if(cloudData && cloudData.image_data) {
                         mergeReqs('__PAYMENT_REQS__', cloudData.image_data);
                         mergeReqs('__SHIPPING_REQS__', cloudData.image_data);
                     }
-                    const { error } = await db.from('leader_data').update({ group_data: groupData, image_data: imageUrlData }).eq('user_id', identifier);
-                    if (error) throw error;
+                    // select() 用于确认确实更新到了目标行，避免“0 行更新”被误报为成功
+                    const { data: updatedRows, error: updateError } = await db.from('leader_data')
+                        .update({ group_data: groupData, image_data: imageUrlData })
+                        .eq('user_id', identifier)
+                        .select('user_id');
+                    if (updateError) throw updateError;
+                    if (!updatedRows || updatedRows.length === 0) {
+                        throw new Error('数据库没有返回任何被更新的记录。可能原因：目标 user_id 记录不存在，或 RLS 策略不允许当前账号更新这条记录。');
+                    }
                     updateSyncStatus('saved');
                 } catch (e) {
-                    updateSyncStatus('error');
+                    console.error('[云端同步失败]', e);
+                    const parts = [
+                        e && e.code ? '错误代码：' + e.code : '',
+                        e && e.message ? '错误信息：' + e.message : String(e),
+                        e && e.details ? '详细信息：' + e.details : '',
+                        e && e.hint ? '数据库提示：' + e.hint : ''
+                    ].filter(Boolean);
+                    updateSyncStatus('error', parts.join('\n'));
                 }
-            }, 1000); 
+            }, 1000);
         }
 
         function mergeReqs(key, cloudImgData) {
@@ -906,40 +987,31 @@
         function saveImageUrlData() { saveDataLocalOnly(); syncToCloud(); }
 
         async function saveQueryKey() {
+            if (workspaceRole !== 'owner') {
+                alert('权限不足：只有团长可以查看和修改访客查询密钥。');
+                return;
+            }
             let key = document.getElementById('settingQueryKey').value.trim();
+            if (!key) return alert('请先填写新的访客查询密钥！');
             showLoading('保存...');
-            const identifier = getDataIdentifier();
-            const { error } = await db.from('leader_data').update({ query_key: key }).eq('user_id', identifier);
-            hideLoading();
-            if(error) alert('保存失败！'); else alert('全局密钥设置成功！');
-        }
-
-        // ==========================================
-        // 👇 新加的：老用户加入/退出共享的逻辑 👇
-        // ==========================================
-        function joinSharedTeam() {
-            let key = document.getElementById('joinShareInput').value.trim();
-            if (!key) return alert('请输入共享密钥！');
-            
-            if (key !== '1012') {
-                return alert('共享密钥错误，请确认后再试！');
-            }
-
-            showLoading('正在加入共享空间...');
-            localStorage.setItem('shared_secret_key', key);
-            
-            setTimeout(() => {
+            try {
+                const identifier = getDataIdentifier();
+                const { error } = await db.from('leader_data').update({ query_key: key }).eq('user_id', identifier);
+                if (error) throw error;
+                alert('全局密钥设置成功！');
+            } catch (e) {
+                alert('保存失败：' + (e.message || '请检查权限或网络'));
+            } finally {
                 hideLoading();
-                alert('✅ 加入成功！即将为你拉取共享数据。');
-                window.location.reload(); 
-            }, 800);
+            }
         }
 
+        // 所有注册管理员自动进入同一共享空间；邀请码仅用于注册资格，不用于伪造数据库 UUID。
+        function joinSharedTeam() {
+            alert('所有已注册管理员已自动使用同一共享空间，无需再次加入。');
+        }
         function exitSharedTeam() {
-            if(confirm('确定要断开共享吗？断开后将回到你自己的独立账号空间。')) {
-                localStorage.removeItem('shared_secret_key');
-                window.location.reload();
-            }
+            alert('共享空间为全体管理员共用，不能通过浏览器单独退出。');
         }
         // 🌟 吃谷成就度排行榜逻辑
         async function doRankSearch() {
@@ -949,14 +1021,10 @@
             if(!key || !myCn) return alert("密钥和CN不能为空！");
             
             showLoading('正在生成你的吃谷报告...');
-            let res = await db.from('leader_data').select('group_data').eq('query_key', key).limit(1);
-            if(res.error || !res.data || res.data.length === 0) {
-                await new Promise(r => setTimeout(r, 1000));
-                res = await db.from('leader_data').select('group_data').eq('query_key', key).limit(1);
-            }
+            let data = null;
+            try { data = await lookupPublicWorkspace(key, myCn, 'rank'); }
+            catch(e) { console.error(e); }
             hideLoading();
-            
-            let data = res.data ? res.data[0] : null;
             if(!data) return alert("未找到密钥！");
             
             let allItems = data.group_data || [];
@@ -1024,12 +1092,9 @@
             let cn = document.getElementById('queryCnInput').value.trim().toLowerCase();
             if(!key || !cn) return alert("密钥和CN不能为空！");
             showLoading('查询中...');
-            let res = await db.from('leader_data').select('group_data, image_data').eq('query_key', key).limit(1);
-            if(res.error || !res.data || res.data.length === 0) {
-                await new Promise(r => setTimeout(r, 1000));
-                res = await db.from('leader_data').select('group_data, image_data').eq('query_key', key).limit(1);
-            }
-            const data = res.data ? res.data[0] : null;
+            let data = null;
+            try { data = await lookupPublicWorkspace(key, document.getElementById('queryCnInput').value.trim(), 'buyer'); }
+            catch(e) { console.error(e); }
             hideLoading();
             if(!data) return alert("未找到密钥！");
             let myItems = data.group_data.filter(item => item.cn.toLowerCase().includes(cn));
@@ -1309,6 +1374,18 @@
         function selectManageBatch(batch) { currentManageBatch = batch; updateSidebar(); renderManageTable(); }
         window.handleSearch = function() { currentSearchKeyword = document.getElementById('manageSearchInput').value.trim().toLowerCase(); renderManageTable(); };
 
+        // 到货日期按本地日历日计算：到货当天为第 0 天，满 150 天显示“掉落”。
+        function getStockDurationLabel(arrivalDate) {
+            if (!arrivalDate) return '未填写到货时间';
+            const m = String(arrivalDate).match(/^(\d{4})-(\d{2})-(\d{2})$/);
+            if (!m) return '日期无效';
+            const arrivalUtc = Date.UTC(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
+            const now = new Date();
+            const todayUtc = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+            const days = Math.max(0, Math.floor((todayUtc - arrivalUtc) / 86400000));
+            return days >= 150 ? '掉落' : `囤货 ${days} 天`;
+        }
+
         function renderManageTable() {
             document.getElementById('manageTitle').innerText = currentManageBatch ? `团期：${currentManageBatch}` : '暂无数据';
             const tbody = document.getElementById('manageTableBody'); tbody.innerHTML = ''; document.getElementById('selectAll').checked = false;
@@ -1337,6 +1414,7 @@
                     <td class="py-2 px-2 text-blue-600 font-bold">${item.cn}</td>
                     <td class="py-2 px-2 text-gray-500 text-xs">¥${item.price} × ${item.count}</td>
                     <td class="py-2 px-2">${item.status || '未到货'}</td>
+                    <td class="py-2 px-2 text-xs"><div>${item.arrivalDate || '—'}</div><div class="${getStockDurationLabel(item.arrivalDate) === '掉落' ? 'text-red-600 font-bold' : 'text-gray-500'}">${getStockDurationLabel(item.arrivalDate)}</div></td>
                     <td class="py-2 px-2"><span class="px-2 py-0.5 rounded text-xs border ${item.paidStatus === '已交'?'text-green-600 bg-green-50':'text-red-500 bg-red-50'}">${item.paidStatus || '未交'}</span></td>
                     <td class="py-2 px-2"><div class="flex items-center gap-3"><button class="btn-edit text-blue-500 hover:text-blue-700 font-bold text-xs" data-id="${item.id}">编辑</button><button class="btn-delete text-red-400 hover:text-red-600 font-bold text-xs" data-id="${item.id}">删除</button></div></td>
                 `;
@@ -1349,9 +1427,28 @@
         window.openBatchEditModal = function() { if(getSelectedIds().length === 0) return alert('请先勾选数据！'); document.getElementById('batchEditModal').classList.remove('hidden'); };
         window.closeBatchEditModal = function() { document.getElementById('batchEditModal').classList.add('hidden'); };
         window.saveBatchEdit = function() {
-            const ids = getSelectedIds(), newPaid = document.getElementById('batchEditPaid').value, newStatus = document.getElementById('batchEditStatus').value;
-            groupData.forEach(item => { if(ids.includes(item.id)) { if(newPaid) item.paidStatus = newPaid; if(newStatus) item.status = newStatus; } });
-            saveData(); closeBatchEditModal(); renderManageTable();
+            const ids = getSelectedIds();
+            const newPaid = document.getElementById('batchEditPaid').value;
+            const newStatus = document.getElementById('batchEditStatus').value;
+            const newBatch = document.getElementById('batchEditBatch').value.trim();
+            const newArrivalDate = document.getElementById('batchEditArrivalDate').value;
+            const clearArrivalDate = document.getElementById('batchClearArrivalDate').checked;
+            if (!newPaid && !newStatus && !newBatch && !newArrivalDate && !clearArrivalDate) return alert('请至少填写或选择一项要修改的内容！');
+            let changed = 0;
+            groupData.forEach(item => {
+                if(ids.includes(String(item.id))) {
+                    if(newPaid) item.paidStatus = newPaid;
+                    if(newStatus) item.status = newStatus;
+                    if(newBatch) item.batch = newBatch;
+                    if(newArrivalDate) item.arrivalDate = newArrivalDate;
+                    else if(clearArrivalDate) item.arrivalDate = '';
+                    changed++;
+                }
+            });
+            // 如果当前团期的订单全部被改名，切换到新团期，避免页面停留在空列表。
+            if (newBatch && currentManageBatch && !groupData.some(i => i.batch === currentManageBatch)) currentManageBatch = newBatch;
+            saveData(); closeBatchEditModal(); updateSidebar(); renderManageTable();
+            alert(`已批量修改 ${changed} 条订单。`);
         };
 
         window.batchDelete = function() {
@@ -1362,15 +1459,16 @@
 
         window.openEditModal = function(id) {
             let item = groupData.find(i => i.id === id); if(!item) return;
-            document.getElementById('editId').value = item.id; document.getElementById('editCn').value = item.cn; document.getElementById('editBatch').value = item.batch; document.getElementById('editCategory').value = item.category; document.getElementById('editCharacter').value = item.character; document.getElementById('editPrice').value = item.price; document.getElementById('editCount').value = item.count; document.getElementById('editStatus').value = item.status || '未到货'; document.getElementById('editPaid').value = item.paidStatus || '未交';
+            document.getElementById('editId').value = item.id; document.getElementById('editCn').value = item.cn; document.getElementById('editBatch').value = item.batch; document.getElementById('editCategory').value = item.category; document.getElementById('editCharacter').value = item.character; document.getElementById('editPrice').value = item.price; document.getElementById('editCount').value = item.count; document.getElementById('editStatus').value = item.status || '未到货'; document.getElementById('editArrivalDate').value = item.arrivalDate || ''; document.getElementById('editPaid').value = item.paidStatus || '未交';
             document.getElementById('editModal').classList.remove('hidden');
         };
         window.closeEditModal = function() { document.getElementById('editModal').classList.add('hidden'); };
         window.saveEdit = function() {
             let item = groupData.find(i => i.id === document.getElementById('editId').value);
             if(item) {
-                item.cn = document.getElementById('editCn').value.trim(); item.batch = document.getElementById('editBatch').value.trim(); item.category = document.getElementById('editCategory').value.trim(); item.character = document.getElementById('editCharacter').value.trim(); item.price = parseFloat(document.getElementById('editPrice').value); item.count = parseInt(document.getElementById('editCount').value); item.status = document.getElementById('editStatus').value; item.paidStatus = document.getElementById('editPaid').value;
-                saveData(); closeEditModal(); renderManageTable();
+                item.cn = document.getElementById('editCn').value.trim(); item.batch = document.getElementById('editBatch').value.trim(); item.category = document.getElementById('editCategory').value.trim(); item.character = document.getElementById('editCharacter').value.trim(); item.price = parseFloat(document.getElementById('editPrice').value); item.count = parseInt(document.getElementById('editCount').value); item.status = document.getElementById('editStatus').value; item.arrivalDate = document.getElementById('editArrivalDate').value; item.paidStatus = document.getElementById('editPaid').value;
+                if (currentManageBatch && !groupData.some(i => i.batch === currentManageBatch)) currentManageBatch = item.batch;
+                saveData(); closeEditModal(); updateSidebar(); renderManageTable();
             }
         };
         
@@ -1618,17 +1716,11 @@
                     const worksheet = workbook.Sheets[firstSheetName];
                     const rows = XLSX.utils.sheet_to_json(worksheet, {header: 1, raw: false, defval: ""});
                     
-                    // 将对象数组转成按列排序的二维数组 (模拟 CSV 解析的结果)
-                    let arrayRows = [];
-                    if(rows.length > 0) {
-                        const headers = Object.keys(rows[0]);
-                        arrayRows.push(headers);
-                        rows.forEach(r => {
-                            let rowArr = [];
-                            headers.forEach(h => rowArr.push(r[h] ? String(r[h]) : ""));
-                            arrayRows.push(rowArr);
-                        });
-                    }
+                    // header:1 已经返回二维数组，直接传入解析器，不能再把列名当作表头重组。
+                    // 保留空单元格和数字 0，避免 Excel 矩阵的列位置错乱。
+                    const arrayRows = rows.map(r =>
+                        Array.from(r || [], cell => cell === null || cell === undefined ? "" : String(cell).trim())
+                    );
                     processImportedData(arrayRows);
                     event.target.value = ''; // 清空选择
                 };
@@ -1662,7 +1754,13 @@
             }
             if(!isMatrix) {
                 let header = rows[0].join(",");
-                if(!header.includes("团期") || !header.includes("买家")) isMatrix = true;
+                // 矩阵模板：第一行是团期名称，第二行是“种类”，第三行是“角色”，第四行是“单价”
+                const isActivityMatrix = rows.length >= 5 &&
+                    rows[0].some(c => String(c || '').trim() !== '') &&
+                    String((rows[1] || [])[1] || '').trim() === '种类' &&
+                    String((rows[2] || [])[1] || '').trim() === '角色' &&
+                    String((rows[3] || [])[1] || '').trim() === '单价';
+                if(isActivityMatrix || !header.includes("团期") || !header.includes("买家")) isMatrix = true;
             }
 
             let newRecords = [];
@@ -1688,17 +1786,17 @@
                     let currentCat = '默认分类';
                     let maxCols = Math.max(headerRow.length, categoryRow.length);
                     
-                    for (let c = 1; c < maxCols; c++) {
+                    for (let c = 2; c < maxCols; c++) {
                         let catCell = categoryRow[c] ? String(categoryRow[c]).trim() : '';
-                        if (catCell && catCell !== '分类' && catCell !== '') {
+                        if (catCell && catCell !== '分类' && catCell !== '种类' && catCell !== '') {
                             currentCat = catCell;
                         }
                         colCategories[c] = currentCat; 
                     }
 
-                    for(let col = 1; col < headerRow.length; col++) {
+                    for(let col = 2; col < headerRow.length; col++) {
                         let character = headerRow[col] ? String(headerRow[col]).trim() : '';
-                        if(!character || character === '种类') continue;
+                        if(!character || character === '种类' || character === '角色') continue;
 
                         let priceStr = priceRow[col] ? String(priceRow[col]).trim() : '0';
                         let price = parseFloat(priceStr) || 0;
@@ -2101,12 +2199,9 @@
             if(!key || !currentShipRawCn) return alert("密钥和CN不能为空！");
             
             showLoading("查询中..."); 
-            let res = await db.from('leader_data').select('user_id, group_data, image_data').eq('query_key', key).limit(1);
-            if(res.error || !res.data || res.data.length === 0) {
-                await new Promise(r => setTimeout(r, 1000));
-                res = await db.from('leader_data').select('user_id, group_data, image_data').eq('query_key', key).limit(1);
-            }
-            const data = res.data ? res.data[0] : null;
+            let data = null;
+            try { data = await lookupPublicWorkspace(key, currentShipRawCn, 'shipping'); }
+            catch(e) { console.error(e); }
             hideLoading();
             
             if(!data) return alert("未找到密钥或团长未设置全局密钥！");
@@ -2244,25 +2339,16 @@
             
             showLoading("提交反馈中...");
             try {
-                const { data } = await db.from('leader_data').select('image_data').eq('user_id', shipUserId).single();
-                let imgData = data.image_data || {}; 
-                let reqs = JSON.parse(imgData['__SHIPPING_REQS__'] || '[]');
-                
-                let target = reqs.find(r => r.id === reqId);
-                if(target) {
-                    target.buyerFeedbackStatus = status;
-                    target.buyerFeedbackRemark = remark;
-                    imgData['__SHIPPING_REQS__'] = JSON.stringify(reqs);
-                    
-                    const { error } = await db.from('leader_data').update({ image_data: imgData }).eq('user_id', shipUserId);
-                    if(error) throw error;
-                    
-                    let localTarget = currentShipData.reqs.find(r => r.id === reqId);
-                    if(localTarget) { localTarget.buyerFeedbackStatus = status; localTarget.buyerFeedbackRemark = remark; }
-                    
-                    hideLoading(); alert("✅ 反馈提交成功！团长那边已经能看到了。");
-                }
-            } catch(e) { hideLoading(); alert("反馈提交失败！请联系团长。"); }
+                const { data, error } = await db.rpc('update_public_shipping_application', {
+                    p_query_key: currentShipKey, p_cn: currentShipRawCn, p_req_id: reqId,
+                    p_action: 'feedback', p_status: status, p_remark: remark
+                });
+                if(error) throw error;
+                if(data !== true) throw new Error('没有找到对应申请，反馈未保存');
+                let localTarget = currentShipData.reqs.find(r => r.id === reqId);
+                if(localTarget) { localTarget.buyerFeedbackStatus = status; localTarget.buyerFeedbackRemark = remark; }
+                hideLoading(); alert("✅ 反馈提交成功！团长和所有管理员都能看到。");
+            } catch(e) { console.error(e); hideLoading(); alert("反馈提交失败：" + (e.message || '请稍后重试')); }
         }
         
         window.updateShipSelection = function(cb) {
@@ -2391,12 +2477,13 @@
             
             showLoading("提交中...");
             try {
-                const { data } = await db.from('leader_data').select('image_data').eq('user_id', shipUserId).single();
-                let imgData = data.image_data || {}; let latestReqs = JSON.parse(imgData['__SHIPPING_REQS__'] || '[]');
-                latestReqs.push(req); imgData['__SHIPPING_REQS__'] = JSON.stringify(latestReqs);
-                const { error } = await db.from('leader_data').update({ image_data: imgData }).eq('user_id', shipUserId);
-                if(error) throw error; hideLoading(); closeShipForm(); alert("✅ 提交成功！"); doShippingSearch(); 
-            } catch(e) { hideLoading(); alert("提交失败！请联系团长开放数据库允许匿名修改。"); }
+                const { data, error } = await db.rpc('append_public_application', {
+                    p_query_key: currentShipKey, p_kind: 'shipping', p_payload: req
+                });
+                if(error) throw error;
+                if(data !== true) throw new Error('申请没有成功写入');
+                hideLoading(); closeShipForm(); alert("✅ 提交成功！所有管理员都能在后台看到这条申请。"); doShippingSearch();
+            } catch(e) { console.error(e); hideLoading(); alert("提交失败：" + (e.message || '请联系团长')); }
         }
         // ================= 排发清单导出逻辑 =================
         window.openShipExportModal = function() {
@@ -2790,7 +2877,7 @@
             
             showLoading("同步删除中...");
             try {
-                const { data, error } = await db.from('leader_data').select('image_data').eq('user_id', currentUser.id).single();
+                const { data, error } = await db.from('leader_data').select('image_data').eq('user_id', getDataIdentifier()).single();
                 if(error) throw error;
                 let imgData = data.image_data || {};
                 let reqs = JSON.parse(imgData['__SHIPPING_REQS__'] || '[]');
@@ -2801,7 +2888,7 @@
                 } else {
                     reqs = reqs.filter(r => r.id !== reqId);
                     imgData['__SHIPPING_REQS__'] = JSON.stringify(reqs);
-                    const { error: updErr } = await db.from('leader_data').update({ image_data: imgData }).eq('user_id', currentUser.id);
+                    const { error: updErr } = await db.from('leader_data').update({ image_data: imgData }).eq('user_id', getDataIdentifier());
                     if(updErr) throw updErr;
                 }
                 
@@ -2832,7 +2919,7 @@
         window.updateShipAdminReq = async function(reqId, field, value) { 
             showLoading("同步更新中...");
             try {
-                const { data, error } = await db.from('leader_data').select('image_data').eq('user_id', currentUser.id).single();
+                const { data, error } = await db.from('leader_data').select('image_data').eq('user_id', getDataIdentifier()).single();
                 if(error) throw error;
                 
                 let imgData = data.image_data || {};
@@ -2863,12 +2950,12 @@
                         }
                     });
                     if (itemsUpdated) {
-                        await db.from('leader_data').update({ group_data: groupData, image_data: imgData }).eq('user_id', currentUser.id);
+                        await db.from('leader_data').update({ group_data: groupData, image_data: imgData }).eq('user_id', getDataIdentifier());
                     } else {
-                        await db.from('leader_data').update({ image_data: imgData }).eq('user_id', currentUser.id);
+                        await db.from('leader_data').update({ image_data: imgData }).eq('user_id', getDataIdentifier());
                     }
                 } else {
-                    await db.from('leader_data').update({ image_data: imgData }).eq('user_id', currentUser.id);
+                    await db.from('leader_data').update({ image_data: imgData }).eq('user_id', getDataIdentifier());
                 }
 
                 imageUrlData['__SHIPPING_REQS__'] = JSON.stringify(reqs);
@@ -2919,22 +3006,18 @@
             if(!confirm('确定要撤销并删除这条排发申请吗？\n撤销后你可以重新勾选商品发起申请。')) return;
             showLoading("撤销中...");
             try {
-                const { data } = await db.from('leader_data').select('image_data').eq('user_id', shipUserId).single();
-                let imgData = data.image_data || {};
-                let latestReqs = JSON.parse(imgData['__SHIPPING_REQS__'] || '[]');
-                
-                latestReqs = latestReqs.filter(r => r.id !== reqId);
-                imgData['__SHIPPING_REQS__'] = JSON.stringify(latestReqs);
-                
-                const { error } = await db.from('leader_data').update({ image_data: imgData }).eq('user_id', shipUserId);
+                const { data, error } = await db.rpc('update_public_shipping_application', {
+                    p_query_key: currentShipKey, p_cn: currentShipRawCn, p_req_id: reqId,
+                    p_action: 'cancel'
+                });
                 if(error) throw error;
-                
+                if(data !== true) throw new Error('未找到可撤销的申请');
                 hideLoading();
                 alert("✅ 已成功撤销申请！");
-                doShippingSearch(); 
+                doShippingSearch();
             } catch(e) {
-                hideLoading();
-                alert("撤销失败！请联系团长。");
+                console.error(e); hideLoading();
+                alert("撤销失败：" + (e.message || '请联系团长'));
             }
         }
 
@@ -3222,15 +3305,11 @@
             currentPayBuyerCn = currentPayRawCn.toLowerCase(); 
             if(!key || !currentPayRawCn) return alert("密钥和CN不能为空！");
             showLoading("查询中..."); 
-                        let res = await db.from('leader_data').select('user_id, group_data, image_data').eq('query_key', key).limit(1);
-            if(res.error || !res.data || res.data.length === 0) {
-                await new Promise(r => setTimeout(r, 1000));
-                res = await db.from('leader_data').select('user_id, group_data, image_data').eq('query_key', key).limit(1);
-            }
-            const data = res.data ? res.data[0] : null;
-            const error = res.error; 
+                        let data = null;
+            try { data = await lookupPublicWorkspace(key, currentPayRawCn, 'payment'); }
+            catch(e) { console.error(e); }
             hideLoading();
-            if(error || !data) return alert("未找到密钥或团长未设置全局密钥！");
+            if(!data) return alert("未找到密钥或团长未设置全局密钥！");
             currentPayKey = key; payUserId = data.user_id; let imgData = data.image_data || {}; 
             currentPayData.imgData = imgData;
             let reqs = JSON.parse(imgData['__PAYMENT_REQS__'] || '[]');
@@ -3289,12 +3368,13 @@
             let req = { id: generateSafeId(), cn: currentPayRawCn, batch: window.currentPayContext.batch, items: window.currentPayContext.itemIds, amount: window.currentPayContext.total, proofImg: window.currentBuyerUploadBase64, remark: document.getElementById('payRemark').value.trim(), status: '待审核', time: Date.now() };
             showLoading("提交作业中...");
             try {
-                const { data } = await db.from('leader_data').select('image_data').eq('user_id', payUserId).single();
-                let imgData = data.image_data || {}; let latestReqs = JSON.parse(imgData['__PAYMENT_REQS__'] || '[]');
-                latestReqs.push(req); imgData['__PAYMENT_REQS__'] = JSON.stringify(latestReqs);
-                const { error } = await db.from('leader_data').update({ image_data: imgData }).eq('user_id', payUserId);
-                if(error) throw error; hideLoading(); closePayForm(); alert("✅ 交肾作业提交成功，等待团长批改！"); doPaymentSearch(); 
-            } catch(e) { hideLoading(); alert("提交失败！"); }
+                const { data, error } = await db.rpc('append_public_application', {
+                    p_query_key: currentPayKey, p_kind: 'payment', p_payload: req
+                });
+                if(error) throw error;
+                if(data !== true) throw new Error('申请没有成功写入');
+                hideLoading(); closePayForm(); alert("✅ 交款申请提交成功，所有管理员都能在后台看到！"); doPaymentSearch();
+            } catch(e) { console.error(e); hideLoading(); alert("提交失败：" + (e.message || '请稍后重试')); }
         }
 
         // ================= 团长端交肾管理 =================
