@@ -350,6 +350,8 @@
             </div>
         </div>
     </div>
+    
+    <!-- ================= 账号注册页面 ================= -->
     <div id="register-screen" class="max-w-md mx-auto pt-20 px-4 hidden fade-in">
         <button onclick="showScreen('login-screen')" class="text-gray-400 mb-4 hover:text-gray-600">← 返回登录</button>
         <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
@@ -358,10 +360,16 @@
                 <input type="email" id="regEmail" placeholder="输入常用邮箱 (用于接收验证码)" class="w-full border border-gray-300 rounded px-3 py-2 focus:border-blue-500 focus:outline-none">
                 <input type="password" id="regPassword" placeholder="设置密码 (至少6位)" class="w-full border border-gray-300 rounded px-3 py-2 focus:border-blue-500 focus:outline-none">
                 <input type="password" id="regConfirmPassword" placeholder="确认密码" class="w-full border border-gray-300 rounded px-3 py-2 focus:border-blue-500 focus:outline-none">
+                
+                <!-- 👇 新增的密钥输入框（加了浅蓝色背景，方便看清） 👇 -->
+                <input type="password" id="regSecretKey" placeholder="🔑 请输入团长注册密钥 (必填)" class="w-full border border-blue-300 bg-blue-50 rounded px-3 py-2 focus:border-blue-500 focus:outline-none">
+                <!-- 👆 新增结束 👆 -->
+                
                 <div class="pt-2"><button onclick="handleRegisterSubmit()" class="w-full bg-green-500 text-white font-bold py-3 rounded shadow hover:bg-green-600 transition">获取注册验证码</button></div>
             </div>
         </div>
     </div>
+    
     <div id="verify-signup-screen" class="max-w-md mx-auto pt-20 px-4 hidden fade-in">
         <button onclick="showScreen('register-screen')" class="text-gray-400 mb-4 hover:text-gray-600">← 返回重新注册</button>
         <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
@@ -373,6 +381,7 @@
             </div>
         </div>
     </div>
+    
     <div id="forgot-screen" class="max-w-md mx-auto pt-20 px-4 hidden fade-in">
         <button onclick="showScreen('login-screen')" class="text-gray-400 mb-4 hover:text-gray-600">← 返回登录</button>
         <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
@@ -384,6 +393,7 @@
             </div>
         </div>
     </div>
+    
     <div id="reset-screen" class="max-w-md mx-auto pt-20 px-4 hidden fade-in">
         <button onclick="showScreen('login-screen')" class="text-gray-400 mb-4 hover:text-gray-600">← 取消重置，去登录</button>
         <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
@@ -579,7 +589,7 @@
                 </div>
             </div>
             
-             <!-- 🌟 云端设置页 -->
+            <!-- 🌟 云端设置页 -->
             <div id="page-cloud" class="hidden">
                 <div class="bg-white p-6 rounded shadow-sm border border-purple-200 max-w-xl mx-auto space-y-6">
                     <h2 class="text-xl font-bold text-purple-700 border-b pb-2">云端全局设置</h2>
@@ -598,10 +608,25 @@
                             <!-- 动态加载各仓库配置 -->
                         </div>
                     </div>
+
+                    <!-- 👇 新加的：老用户直接加入共享空间 👇 -->
+                    <div class="border-t border-purple-100 pt-4 mt-6">
+                        <h3 class="font-bold text-gray-700 mb-2">🔗 加入数据共享团队</h3>
+                        <p class="text-xs text-gray-500 mb-3">如果你之前是独立账号，输入团长给你的共享密钥（如 1012），即可瞬间切换到团队共享后台。<br><span class="text-red-500 font-bold">⚠️ 注意：加入共享后，你原来独立账号的数据将不再显示，建议先去“订单管理”导出数据备份！</span></p>
+                        <div class="flex gap-2">
+                            <input type="password" id="joinShareInput" placeholder="输入共享密钥 (如 1012)" class="flex-1 border border-gray-300 rounded px-3 py-2 focus:border-purple-500 outline-none">
+                            <button onclick="joinSharedTeam()" class="bg-purple-500 text-white px-6 rounded shadow hover:bg-purple-600 font-bold whitespace-nowrap">加入共享</button>
+                        </div>
+                        
+                        <!-- 👇 顺便送你的：退出共享按钮 👇 -->
+                        <div class="mt-4 pt-3 border-t border-dashed border-gray-200 flex justify-end">
+                            <button onclick="exitSharedTeam()" class="text-xs text-red-400 hover:text-red-600 underline">断开共享，恢复独立空间</button>
+                        </div>
+                    </div>
+                    <!-- 👆 新加的功能结束 👆 -->
+
                 </div>
             </div>
-        </div>
-    </div>
 
     <!-- 弹窗区 (柄图双通道上传) -->
     <div id="imageUrlModal" class="hidden fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 p-4">
@@ -669,7 +694,7 @@
     <div class="bg-white rounded p-5 w-full max-w-sm shadow-lg max-h-[90vh] overflow-y-auto"><h3 class="text-lg font-bold mb-4 text-gray-800">编辑排单信息</h3><div class="space-y-3 text-sm"><input type="hidden" id="editId"><div><label class="block mb-1">买家 CN</label><input type="text" id="editCn" class="w-full border rounded px-2 py-1.5"></div><div><label class="block mb-1">团期</label><input type="text" id="editBatch" class="w-full border rounded px-2 py-1.5"></div><div><label class="block mb-1">商品种类</label><input type="text" id="editCategory" class="w-full border rounded px-2 py-1.5"></div><div><label class="block mb-1">角色款式</label><input type="text" id="editCharacter" class="w-full border rounded px-2 py-1.5"></div><div class="flex gap-2"><div class="flex-1"><label class="block mb-1">单价</label><input type="number" step="0.01" id="editPrice" class="w-full border rounded px-2 py-1.5"></div><div class="flex-1"><label class="block mb-1">数量</label><input type="number" id="editCount" class="w-full border rounded px-2 py-1.5"></div></div><div><label class="block mb-1">到货状态</label><select id="editStatus" class="w-full border rounded px-2 py-1.5"><option value="未到货">未到货</option><option value="已到货">已到货</option><option value="已排发">已排发</option></select></div><div><label class="block mb-1">交肾状态</label><select id="editPaid" class="w-full border rounded px-2 py-1.5"><option value="未交">未交</option><option value="已交">已交</option></select></div></div><div class="mt-6 flex justify-end gap-2"><button onclick="closeEditModal()" class="px-4 py-1.5 border rounded">取消</button><button onclick="saveEdit()" class="px-4 py-1.5 bg-blue-500 text-white rounded">保存</button></div></div>
 </div>
 
-    <script>
+        <script>
         function generateSafeId() { return Date.now().toString(36) + Math.random().toString(36).substr(2, 5); }
 
         let groupData = [];
@@ -713,11 +738,20 @@
             }
         }
 
+        // 🌟 核心：根据是否加入共享，决定读写哪个空间
+        function getDataIdentifier() {
+            if (localStorage.getItem('shared_secret_key') === '1012') {
+                return 'master_key_1012';
+            }
+            return currentUser.id;
+        }
+
         async function forceRefreshData() {
             if(!currentUser) return;
             showLoading('正在从云端拉取最新数据...');
             try {
-                const { data, error } = await db.from('leader_data').select('*').eq('user_id', currentUser.id).single();
+                const identifier = getDataIdentifier();
+                const { data, error } = await db.from('leader_data').select('*').eq('user_id', identifier).single();
                 if(error) throw error;
                 if(data) {
                     groupData = data.group_data || [];
@@ -753,14 +787,25 @@
         async function handleRegisterSubmit() {
             let email = document.getElementById('regEmail').value.trim();
             let pwd = document.getElementById('regPassword').value;
+            let secretKey = document.getElementById('regSecretKey').value.trim();
+
             if(!email) return alert('请正确填写邮箱！');
             if(pwd.length < 6 || pwd !== document.getElementById('regConfirmPassword').value) return alert('密码无效或不一致！');
+            
+            if(secretKey !== '1012') {
+                return alert('注册密钥错误！请联系团长获取！'); 
+            }
+
             showLoading('发送验证码中...');
             try {
                 const { data, error } = await db.auth.signUp({ email, password: pwd });
                 hideLoading();
                 if(error) alert('注册失败: ' + error.message);
-                else { registerTargetEmail = email; showScreen('verify-signup-screen'); }
+                else { 
+                    localStorage.setItem('shared_secret_key', secretKey);
+                    registerTargetEmail = email; 
+                    showScreen('verify-signup-screen'); 
+                }
             } catch (err) { hideLoading(); alert('错误，请检查网络'); }
         }
 
@@ -807,29 +852,36 @@
             await db.auth.signOut(); currentUser = null; groupData = []; imageUrlData = {}; showScreen('portal-screen');
         }
 
+        // 🌟 核心：拉取数据时使用共享判断
         async function initCloudData() {
             try {
                 showLoading('正在拉取数据...');
-                const { data, error } = await db.from('leader_data').select('*').eq('user_id', currentUser.id).single();
+                const identifier = getDataIdentifier();
+                const { data, error } = await db.from('leader_data').select('*').eq('user_id', identifier).single();
                 if(data) {
                     groupData = data.group_data || []; imageUrlData = data.image_data || {};
                     document.getElementById('settingQueryKey').value = data.query_key || '';
-                } else { await db.from('leader_data').insert({ user_id: currentUser.id, group_data: [], image_data: {} }); }
-            } catch(e) {} finally { hideLoading(); showScreen('dashboard-screen'); updateBatchDatalist(); switchTab('input'); }
+                } else { 
+                    await db.from('leader_data').insert({ user_id: identifier, group_data: [], image_data: {} }); 
+                }
+            } catch(e) { console.log(e); } 
+            finally { hideLoading(); showScreen('dashboard-screen'); updateBatchDatalist(); switchTab('input'); }
         }
 
         let saveTimeout = null;
+        // 🌟 核心：保存数据时使用共享判断
         async function syncToCloud() {
             if(!currentUser) return;
             updateSyncStatus('saving'); clearTimeout(saveTimeout);
             saveTimeout = setTimeout(async () => {
                 try {
-                    const { data: cloudData } = await db.from('leader_data').select('image_data').eq('user_id', currentUser.id).single();
+                    const identifier = getDataIdentifier();
+                    const { data: cloudData } = await db.from('leader_data').select('image_data').eq('user_id', identifier).single();
                     if(cloudData && cloudData.image_data) {
                         mergeReqs('__PAYMENT_REQS__', cloudData.image_data);
                         mergeReqs('__SHIPPING_REQS__', cloudData.image_data);
                     }
-                    const { error } = await db.from('leader_data').update({ group_data: groupData, image_data: imageUrlData }).eq('user_id', currentUser.id);
+                    const { error } = await db.from('leader_data').update({ group_data: groupData, image_data: imageUrlData }).eq('user_id', identifier);
                     if (error) throw error;
                     updateSyncStatus('saved');
                 } catch (e) {
@@ -856,11 +908,39 @@
         async function saveQueryKey() {
             let key = document.getElementById('settingQueryKey').value.trim();
             showLoading('保存...');
-            const { error } = await db.from('leader_data').update({ query_key: key }).eq('user_id', currentUser.id);
+            const identifier = getDataIdentifier();
+            const { error } = await db.from('leader_data').update({ query_key: key }).eq('user_id', identifier);
             hideLoading();
             if(error) alert('保存失败！'); else alert('全局密钥设置成功！');
         }
-        
+
+        // ==========================================
+        // 👇 新加的：老用户加入/退出共享的逻辑 👇
+        // ==========================================
+        function joinSharedTeam() {
+            let key = document.getElementById('joinShareInput').value.trim();
+            if (!key) return alert('请输入共享密钥！');
+            
+            if (key !== '1012') {
+                return alert('共享密钥错误，请确认后再试！');
+            }
+
+            showLoading('正在加入共享空间...');
+            localStorage.setItem('shared_secret_key', key);
+            
+            setTimeout(() => {
+                hideLoading();
+                alert('✅ 加入成功！即将为你拉取共享数据。');
+                window.location.reload(); 
+            }, 800);
+        }
+
+        function exitSharedTeam() {
+            if(confirm('确定要断开共享吗？断开后将回到你自己的独立账号空间。')) {
+                localStorage.removeItem('shared_secret_key');
+                window.location.reload();
+            }
+        }
         // 🌟 吃谷成就度排行榜逻辑
         async function doRankSearch() {
             let key = document.getElementById('rankKeyInput').value.trim();
@@ -1258,7 +1338,7 @@
                     <td class="py-2 px-2 text-gray-500 text-xs">¥${item.price} × ${item.count}</td>
                     <td class="py-2 px-2">${item.status || '未到货'}</td>
                     <td class="py-2 px-2"><span class="px-2 py-0.5 rounded text-xs border ${item.paidStatus === '已交'?'text-green-600 bg-green-50':'text-red-500 bg-red-50'}">${item.paidStatus || '未交'}</span></td>
-                    <td class="py-2 px-2 flex gap-3"><button class="btn-edit text-blue-500 hover:text-blue-700 font-bold text-xs" data-id="${item.id}">编辑</button><button class="btn-delete text-red-400 hover:text-red-600 font-bold text-xs" data-id="${item.id}">删除</button></td>
+                    <td class="py-2 px-2"><div class="flex items-center gap-3"><button class="btn-edit text-blue-500 hover:text-blue-700 font-bold text-xs" data-id="${item.id}">编辑</button><button class="btn-delete text-red-400 hover:text-red-600 font-bold text-xs" data-id="${item.id}">删除</button></div></td>
                 `;
                 tbody.appendChild(tr);
             });
